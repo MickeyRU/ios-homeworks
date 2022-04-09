@@ -27,7 +27,7 @@ class MainViewController: UITabBarController {
         let secondNavController = UINavigationController(rootViewController: secondNC)
         secondNC.tabBarItem.title = "Профиль"
         secondNC.tabBarItem.image = UIImage(systemName: "person.crop.circle")
-        secondNC.navigationItem.title = "Профиль VC"
+        secondNC.navigationItem.title = "Profile"
         
         viewControllers = [firstNavController, secondNavController]
     }
