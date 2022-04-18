@@ -22,7 +22,7 @@ class MainViewController: UITabBarController {
         let firstNavController = UINavigationController(rootViewController: firstNC)
         firstNC.tabBarItem.title = "Лента"
         firstNC.tabBarItem.image = UIImage(systemName: "list.bullet")
-        firstNC.navigationItem.title = "Лента VC"
+        firstNC.navigationItem.title = "Лента"
         
         let secondNavController = UINavigationController(rootViewController: secondNC)
         secondNC.tabBarItem.title = "Профиль"

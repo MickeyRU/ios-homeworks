@@ -1,71 +1,120 @@
 //
-//  ProfileHeaderView.swift
+//  ProfileHeaderViewV2.swift
 //  Navigation
 //
-//  Created by Павел Афанасьев on 09.04.2022.
+//  Created by Павел Афанасьев on 15.04.2022.
 //
 
 import UIKit
 
 class ProfileHeaderView: UIView {
     
-    let profileStatus = UILabel()
-
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
+    private var statusText: String = ""
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
+    let avatarImageView: UIImageView = {
+        let view = UIImageView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.image = UIImage(named: "Марго")
+        view.layer.cornerRadius = 50
+        view.layer.borderWidth = 3
+        view.layer.borderColor = UIColor.white.cgColor
+        view.contentMode = .scaleAspectFill
+        view.clipsToBounds = true
+        return view
+    }()
+    
+    let fullNameLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 18, weight: .bold)
+        label.textColor = .black
+        label.text = "Корги Марго"
+        return label
+    }()
+    
+    let statusLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .systemFont(ofSize: 14, weight: .regular)
+        label.textColor = .gray
+        label.text = "Waiting for something..."
+        return label
+    }()
+    
+    lazy var statusTextField: UITextField = {
+        let textField = UITextField()
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.text = "Listening to music"
+        textField.layer.cornerRadius = 12
+        textField.font = .systemFont(ofSize: 12, weight: .regular)
+        textField.textColor = .black
+        textField.backgroundColor = .white
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+        
+        //        // задача со звездочкой из 1.1
+        //        Добавьте обработку изменения введенного текста при помощи addTarget, UIEvent выбрать .editingChanged. Добавьте функцию, которую будет принимать обработчик, например, @objc func statusTextChanged(_ textField: UITextField).
+        //        Добавьте приватную переменную statusText с типом данных String.
+        //        Функция statusTextChanged(_ :) должна записывать текст в переменную statusText.
+        //        Измените функцию buttonPressed() так, чтобы при нажатии на кнопку введенный текст устанавливался в качестве статуса.
+        return textField
+    }()
+    
+    lazy var setStatusButton: UIButton = {
+        
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Show status", for: .normal)
+        button.backgroundColor = .blue
+        button.layer.cornerRadius = 4
+        button.layer.shadowOffset.height = 4
+        button.layer.shadowOffset.width = 4
+        button.layer.shadowRadius = 4
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOpacity = 0.7
+        button.addTarget(self, action: #selector(pushButton), for: .touchUpInside)
+        return button
+    }()
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        setUpProfile()
+        layout()
     }
     
-    func setUpProfile() {
-        
-        //добавляем фотку профиля
-        let profilePhoto = UIImageView(frame: CGRect(x: self.safeAreaInsets.left + 16, y: self.safeAreaInsets.top + 16, width: 100, height: 100))
-        profilePhoto.image = UIImage(named: "Марго")
-        profilePhoto.layer.cornerRadius = 50
-        profilePhoto.layer.borderWidth = 3
-        profilePhoto.layer.borderColor = UIColor.white.cgColor
-        profilePhoto.contentMode = .scaleAspectFill
-        profilePhoto.clipsToBounds = true
-        addSubview(profilePhoto)
-        
-        //добавляем заголовок
-        let headLabel = UILabel(frame: CGRect(x: profilePhoto.frame.maxX + 30 , y: self.safeAreaInsets.top + 27, width: window!.frame.width - 32, height: 35))
-        headLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        headLabel.textColor = .black
-        headLabel.text = "Корги Марго"
-        addSubview(headLabel)
-        
-        //добавляем статус в профиле
-        profileStatus.frame = CGRect(x: profilePhoto.frame.maxX + 30, y: profilePhoto.frame.origin.y - 16, width: headLabel.frame.width, height: 33)
-        profileStatus.font = .systemFont(ofSize: 14, weight: .regular)
-        profileStatus.textColor = .gray
-        profileStatus.text = "Waiting for something"
-        addSubview(profileStatus)
-        
-        //добавляем кнопку "показать статус"
-        let showStatusButton = UIButton(frame: CGRect(x: self.safeAreaInsets.left + 16, y: profilePhoto.frame.maxY + 16, width: window!.frame.width - 32, height: 50))
-        showStatusButton.titleLabel?.font = .systemFont(ofSize: 14, weight: .regular)
-        showStatusButton.setTitle("Show status", for: .normal)
-        showStatusButton.titleLabel?.textColor = .white
-        showStatusButton.layer.cornerRadius = 4
-        showStatusButton.backgroundColor = .blue
-        showStatusButton.layer.shadowOffset = CGSize(width: 4, height: 4)
-        showStatusButton.layer.shadowRadius = 4
-        showStatusButton.layer.shadowColor = UIColor.black.cgColor
-        showStatusButton.layer.shadowOpacity = 0.7
-        showStatusButton.addTarget(self, action: #selector(pushShowStatusButton), for: .touchUpInside)
-        addSubview(showStatusButton)
+    @objc func statusTextChanged(sender: UITextField) {
+        statusText = statusTextField.text ?? "Waiting for something..."
     }
+    
+    @objc func pushButton(sender: UIButton) {
+        print("Status is: \(String(describing: statusLabel.text))")
+    }
+    
+    private func layout() {
+        [avatarImageView, fullNameLabel, statusLabel, setStatusButton, ].forEach{addSubview($0)}
         
-    @objc func pushShowStatusButton(sender: UIButton!) {
-        print("Status is: \(profileStatus.text)")
+        NSLayoutConstraint.activate([
+            avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
+            avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            avatarImageView.widthAnchor.constraint(equalToConstant: 100),
+            avatarImageView.heightAnchor.constraint(equalToConstant: 100)
+        ])
+        
+        NSLayoutConstraint.activate([
+            fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
+            fullNameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 27)
+        ])
+        
+        NSLayoutConstraint.activate([
+            setStatusButton.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 16),
+            setStatusButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            setStatusButton.widthAnchor.constraint(equalTo: self.window!.widthAnchor, constant: -32),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
+        
+        NSLayoutConstraint.activate([
+            statusLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: 27),
+            statusLabel.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -34)
+        ])
     }
 }

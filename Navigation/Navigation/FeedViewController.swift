@@ -15,7 +15,9 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         makeButton()
+        
     }
+    
     
     private func makeButton() {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
