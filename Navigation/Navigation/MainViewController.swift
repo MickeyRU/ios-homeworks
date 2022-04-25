@@ -10,7 +10,7 @@ import UIKit
 class MainViewController: UITabBarController {
 
     let firstNC = FeedViewController()
-    let secondNC = ProfileViewController()
+    let secondNC = LogInViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class MainViewController: UITabBarController {
         secondNC.tabBarItem.title = "Профиль"
         secondNC.tabBarItem.image = UIImage(systemName: "person.crop.circle")
         secondNC.navigationItem.title = "Profile"
-        
+    
         viewControllers = [firstNavController, secondNavController]
     }
 }

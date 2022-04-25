@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE103FF628116BF2004AC3DA /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE103FF528116BF2004AC3DA /* LogInViewController.swift */; };
 		BE20B5592809A3DF006B7361 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE20B5582809A3DF006B7361 /* ProfileHeaderView.swift */; };
 		BED8FF6427FC279200AD379F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED8FF6327FC279200AD379F /* AppDelegate.swift */; };
 		BED8FF6D27FC279300AD379F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BED8FF6C27FC279300AD379F /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE103FF528116BF2004AC3DA /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		BE20B5582809A3DF006B7361 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		BED8FF6027FC279200AD379F /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BED8FF6327FC279200AD379F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -48,6 +50,7 @@
 			children = (
 				BED8FF7B27FC3B3C00AD379F /* ProfileViewController.swift */,
 				BE20B5582809A3DF006B7361 /* ProfileHeaderView.swift */,
+				BE103FF528116BF2004AC3DA /* LogInViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				BE20B5592809A3DF006B7361 /* ProfileHeaderView.swift in Sources */,
 				BED8FF7A27FC3B3200AD379F /* FeedViewController.swift in Sources */,
 				BED8FF7C27FC3B3C00AD379F /* ProfileViewController.swift in Sources */,
+				BE103FF628116BF2004AC3DA /* LogInViewController.swift in Sources */,
 				BED8FF6427FC279200AD379F /* AppDelegate.swift in Sources */,
 				BED8FF8027FC686100AD379F /* InfoViewController.swift in Sources */,
 				BED8FF7E27FC449A00AD379F /* PostViewController.swift in Sources */,

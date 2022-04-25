@@ -27,15 +27,14 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.navigationController?.navigationBar.isHidden = false
         configurateHeaderView()
     }
     
     private func configurateHeaderView(){
-        
         [headerView, newButton].forEach{view.addSubview($0)}
-
         headerView.frame = view.frame
-     
+        
         NSLayoutConstraint.activate([
             headerView.widthAnchor.constraint(equalTo: view.widthAnchor),
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -47,6 +46,4 @@ class ProfileViewController: UIViewController {
             newButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
-    
 }

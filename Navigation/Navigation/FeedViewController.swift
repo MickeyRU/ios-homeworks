@@ -18,7 +18,6 @@ class FeedViewController: UIViewController {
         
     }
     
-    
     private func makeButton() {
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 40))
         button.center = view.center

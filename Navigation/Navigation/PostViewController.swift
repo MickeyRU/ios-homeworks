@@ -17,13 +17,10 @@ class PostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .green
         self.navigationItem.title = titlePost
-        
         let barButtonItem = UIBarButtonItem(title: "Инфо", style: .plain, target: self, action: #selector(barButtonTap))
         self.navigationItem.rightBarButtonItem = barButtonItem
-
     }
     @objc private func barButtonTap(){
         let InfoViewController = InfoViewController()
