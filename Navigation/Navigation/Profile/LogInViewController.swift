@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LogInViewController: UIViewController, UITextFieldDelegate {
+class LogInViewController: UIViewController {
     
     private let ColorSet: String = "#4885CC"
     
@@ -102,11 +102,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         nc.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    
+    // Функция трансформации hex -> UIColor
     private func hexStringToUIColor (hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
@@ -216,3 +212,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
+// MARK: UITextFieldDelegate
+
+extension LogInViewController: UITextFieldDelegate {
+    
+}

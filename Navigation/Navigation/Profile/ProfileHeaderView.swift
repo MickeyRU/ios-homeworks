@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+class ProfileHeaderView: UIView, UITextFieldDelegate  {
     
     let avatarImageView: UIImageView = {
         let view = UIImageView()
@@ -72,9 +72,13 @@ class ProfileHeaderView: UIView {
     
     private var statusText: String = ""
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         layout()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     @objc func statusTextChanged(sender: UITextField) -> String {
