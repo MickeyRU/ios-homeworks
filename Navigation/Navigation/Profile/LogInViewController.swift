@@ -91,13 +91,13 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         layout()
         view.backgroundColor = .white
+        navigationController?.navigationBar.isHidden = true  // скрывает надпись профиль сверху
         loginField.delegate = self
         passwordField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
         nc.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         nc.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
     }
@@ -143,7 +143,7 @@ class LogInViewController: UIViewController {
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
             contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor),
-            /// Обязательно выставить ширину contentView !!!!
+            // Обязательно выставить ширину contentView !!!!
             contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor)
         ])
         
@@ -154,32 +154,25 @@ class LogInViewController: UIViewController {
             vkLogoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             vkLogoImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             vkLogoImage.widthAnchor.constraint(equalToConstant: 100),
-            vkLogoImage.heightAnchor.constraint(equalToConstant: 100)
-        ])
-        
-        NSLayoutConstraint.activate([
+            vkLogoImage.heightAnchor.constraint(equalToConstant: 100),
+       
             stackView.topAnchor.constraint(equalTo: vkLogoImage.bottomAnchor, constant: 120),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            stackView.heightAnchor.constraint(equalToConstant: 100)
-        ])
-        
-        NSLayoutConstraint.activate([
+            stackView.heightAnchor.constraint(equalToConstant: 100),
+      
             loginButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             loginButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
             loginButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
-            loginButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        
-        NSLayoutConstraint.activate([
+            loginButton.heightAnchor.constraint(equalToConstant: 50),
+    
             loginField.topAnchor.constraint(equalTo: stackView.topAnchor),
             loginField.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            loginField.heightAnchor.constraint(equalToConstant: 50)
-        ])
-        NSLayoutConstraint.activate([
+            loginField.heightAnchor.constraint(equalToConstant: 50),
+    
             passwordField.topAnchor.constraint(equalTo: loginField.bottomAnchor),
             passwordField.widthAnchor.constraint(equalTo: loginField.widthAnchor),
-            passwordField.heightAnchor.constraint(equalToConstant: 50)
+            passwordField.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
     

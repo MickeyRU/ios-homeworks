@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		BE103FF628116BF2004AC3DA /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE103FF528116BF2004AC3DA /* LogInViewController.swift */; };
 		BE20B5592809A3DF006B7361 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE20B5582809A3DF006B7361 /* ProfileHeaderView.swift */; };
+		BE2B991A282BE6F4009ABE66 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B9919282BE6F4009ABE66 /* PhotosTableViewCell.swift */; };
+		BE2B991C282BE7CB009ABE66 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B991B282BE7CB009ABE66 /* ImageModel.swift */; };
+		BE2B991E282BEF26009ABE66 /* CellPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B991D282BEF26009ABE66 /* CellPhotoCollectionViewCell.swift */; };
+		BE2B9920282BF8AC009ABE66 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B991F282BF8AC009ABE66 /* PhotosViewController.swift */; };
+		BE2B9922282BF9F2009ABE66 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2B9921282BF9F2009ABE66 /* PhotosCollectionViewCell.swift */; };
 		BE5D7B1E2816BF5C00617437 /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D7B1D2816BF5C00617437 /* PostModel.swift */; };
 		BE5D7B212816CA8000617437 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D7B202816CA8000617437 /* PostTableViewCell.swift */; };
 		BE5D7B252816E4E400617437 /* UIView+ extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5D7B242816E4E400617437 /* UIView+ extension.swift */; };
@@ -25,6 +30,11 @@
 /* Begin PBXFileReference section */
 		BE103FF528116BF2004AC3DA /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		BE20B5582809A3DF006B7361 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		BE2B9919282BE6F4009ABE66 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
+		BE2B991B282BE7CB009ABE66 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		BE2B991D282BEF26009ABE66 /* CellPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		BE2B991F282BF8AC009ABE66 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		BE2B9921282BF9F2009ABE66 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE5D7B1D2816BF5C00617437 /* PostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
 		BE5D7B202816CA8000617437 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		BE5D7B242816E4E400617437 /* UIView+ extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ extension.swift"; sourceTree = "<group>"; };
@@ -51,6 +61,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE2B9918282BE6BB009ABE66 /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+				BE2B991F282BF8AC009ABE66 /* PhotosViewController.swift */,
+				BE2B9921282BF9F2009ABE66 /* PhotosCollectionViewCell.swift */,
+				BE2B9919282BE6F4009ABE66 /* PhotosTableViewCell.swift */,
+				BE2B991D282BEF26009ABE66 /* CellPhotoCollectionViewCell.swift */,
+				BE2B991B282BE7CB009ABE66 /* ImageModel.swift */,
+			);
+			path = Photo;
+			sourceTree = "<group>";
+		};
 		BE5D7B27281823C700617437 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -72,8 +94,8 @@
 		BE67B79128019D6A00A9B318 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				BED8FF7B27FC3B3C00AD379F /* ProfileViewController.swift */,
 				BE103FF528116BF2004AC3DA /* LogInViewController.swift */,
+				BED8FF7B27FC3B3C00AD379F /* ProfileViewController.swift */,
 				BE20B5582809A3DF006B7361 /* ProfileHeaderView.swift */,
 			);
 			path = Profile;
@@ -104,6 +126,7 @@
 				BED8FF7F27FC686100AD379F /* InfoViewController.swift */,
 				BE67B79128019D6A00A9B318 /* Profile */,
 				BE5D7B2828182D2900617437 /* Post */,
+				BE2B9918282BE6BB009ABE66 /* Photo */,
 				BE5D7B27281823C700617437 /* Extensions */,
 				BED8FF6C27FC279300AD379F /* Assets.xcassets */,
 				BED8FF6E27FC279300AD379F /* LaunchScreen.storyboard */,
@@ -182,6 +205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE2B991A282BE6F4009ABE66 /* PhotosTableViewCell.swift in Sources */,
 				BED8FF7827FC39E200AD379F /* MainViewController.swift in Sources */,
 				BE20B5592809A3DF006B7361 /* ProfileHeaderView.swift in Sources */,
 				BED8FF7A27FC3B3200AD379F /* FeedViewController.swift in Sources */,
@@ -190,8 +214,12 @@
 				BED8FF6427FC279200AD379F /* AppDelegate.swift in Sources */,
 				BE5D7B212816CA8000617437 /* PostTableViewCell.swift in Sources */,
 				BE5D7B1E2816BF5C00617437 /* PostModel.swift in Sources */,
+				BE2B9920282BF8AC009ABE66 /* PhotosViewController.swift in Sources */,
 				BED8FF8027FC686100AD379F /* InfoViewController.swift in Sources */,
 				BED8FF7E27FC449A00AD379F /* PostViewController.swift in Sources */,
+				BE2B991E282BEF26009ABE66 /* CellPhotoCollectionViewCell.swift in Sources */,
+				BE2B9922282BF9F2009ABE66 /* PhotosCollectionViewCell.swift in Sources */,
+				BE2B991C282BE7CB009ABE66 /* ImageModel.swift in Sources */,
 				BE5D7B252816E4E400617437 /* UIView+ extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
