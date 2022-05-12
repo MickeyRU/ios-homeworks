@@ -73,13 +73,14 @@ class PhotosTableViewCell: UITableViewCell {
         
         // Отступ в 12 поинтов
         let indent: CGFloat = 12
+        let indentForPhoto: CGFloat = 8
         
         NSLayoutConstraint.activate([
             
             // констрейнт collectionView (с фотками с горизонтальным скролом)
             collectionView.topAnchor.constraint(equalTo: labelText.bottomAnchor, constant: indent),
-            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: indent),
-            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -indent),
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: indent - indentForPhoto),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -indent + indentForPhoto),
             collectionView.heightAnchor.constraint(equalToConstant: 100),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -indent),
             
