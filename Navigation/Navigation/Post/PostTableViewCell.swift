@@ -100,29 +100,20 @@ class PostTableViewCell: UITableViewCell {
             postNameLabel.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: standartIndend),
             postNameLabel.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: standartIndend),
             postNameLabel.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: -standartIndend),
-            postNameLabel.bottomAnchor.constraint(equalTo: postImageView.topAnchor, constant: -imageIndend)
-        ])
-        
-        NSLayoutConstraint.activate([
+            postNameLabel.bottomAnchor.constraint(equalTo: postImageView.topAnchor, constant: -imageIndend),
+    
             postImageView.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor),
             postImageView.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -standartIndend),
             postImageView.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor),
-            postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor, multiplier: 1.0)
+            postImageView.heightAnchor.constraint(equalTo: postImageView.widthAnchor, multiplier: 1.0),
 
-        ])
-        
-        NSLayoutConstraint.activate([
             descriptionLabel.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: standartIndend),
-            descriptionLabel.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: -standartIndend)
-        ])
-        
-        NSLayoutConstraint.activate([
+            descriptionLabel.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: -standartIndend),
+    
             likesLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: standartIndend),
             likesLabel.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: standartIndend),
             likesLabel.bottomAnchor.constraint(equalTo: whiteView.bottomAnchor, constant: -standartIndend),
-        ])
-        
-        NSLayoutConstraint.activate([
+     
             viewsLabel.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: standartIndend),
             viewsLabel.trailingAnchor.constraint(equalTo: whiteView.trailingAnchor, constant: -standartIndend),
             viewsLabel.bottomAnchor.constraint(equalTo: whiteView.bottomAnchor, constant: -standartIndend)
