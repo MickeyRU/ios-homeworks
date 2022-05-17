@@ -13,6 +13,8 @@ class LogInViewController: UIViewController {
     
     private let nc = NotificationCenter.default
     
+    private lazy var loginAndPassword = LoginBase()
+    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -87,6 +89,17 @@ class LogInViewController: UIViewController {
         return button
     }()
     
+    // лейбел для Алерта при не правильном пароле
+    private let warningLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Длина пароля менее 6 символов"
+        label.textColor = .systemRed
+        label.font = .systemFont(ofSize: 10)
+        label.isHidden = true
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
@@ -148,31 +161,34 @@ class LogInViewController: UIViewController {
         ])
         
         [loginField, passwordField].forEach { stackView.addArrangedSubview($0) }
-        [vkLogoImage, stackView, loginButton].forEach { contentView.addSubview($0) }
+        [vkLogoImage, stackView, loginButton, warningLabel].forEach { contentView.addSubview($0) }
         
         NSLayoutConstraint.activate([
             vkLogoImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 120),
             vkLogoImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             vkLogoImage.widthAnchor.constraint(equalToConstant: 100),
             vkLogoImage.heightAnchor.constraint(equalToConstant: 100),
-       
+            
             stackView.topAnchor.constraint(equalTo: vkLogoImage.bottomAnchor, constant: 120),
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             stackView.heightAnchor.constraint(equalToConstant: 100),
-      
+            
             loginButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             loginButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
             loginButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
-    
+            
             loginField.topAnchor.constraint(equalTo: stackView.topAnchor),
             loginField.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             loginField.heightAnchor.constraint(equalToConstant: 50),
-    
+            
             passwordField.topAnchor.constraint(equalTo: loginField.bottomAnchor),
             passwordField.widthAnchor.constraint(equalTo: loginField.widthAnchor),
             passwordField.heightAnchor.constraint(equalToConstant: 50),
+            
+            warningLabel.topAnchor.constraint(equalTo: stackView.bottomAnchor),
+            warningLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
         ])
     }
     
@@ -180,6 +196,7 @@ class LogInViewController: UIViewController {
         loginField.resignFirstResponder()
         passwordField.resignFirstResponder()
     }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
@@ -190,9 +207,44 @@ class LogInViewController: UIViewController {
         return true
     }
     
+    private func showupAlert() {
+        let alert = UIAlertController(title: "Неверный логин или пароль", message: nil, preferredStyle: .alert)
+        let actionPrint = UIAlertAction(title: "ок", style: .default) { (_) -> Void in }
+        alert.addAction(actionPrint)
+        present(alert, animated: true, completion: nil)
+    }
+    
     @objc func buttonClicked() {
         let vc = ProfileViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        
+        // Проверка на заполнениею логина и пароля
+        guard let login = loginField.text else { return }
+        guard let password = passwordField.text else { return }
+        
+        if login.isEmpty && password.isEmpty {
+            loginField.shakeField()
+            passwordField.shakeField()
+        } else if login.isEmpty {
+            loginField.shakeField()
+        } else if password.isEmpty {
+            passwordField.shakeField()
+        } else {
+            if password.count < 6 {
+                warningLabel.isHidden = false
+            } else {
+                warningLabel.isHidden = true
+                if (loginField.text != loginAndPassword.basicUserName) && (passwordField.text != loginAndPassword.basicUserPassword) {
+                    showupAlert()
+                } else if loginField.text != loginAndPassword.basicUserName {
+                    showupAlert()
+                } else if passwordField.text != loginAndPassword.basicUserPassword {
+                    showupAlert()
+                } else {
+                    navigationController?.pushViewController(vc, animated: true)
+                    warningLabel.isHidden = true
+                }
+            }
+        }
     }
     
     @objc func adjustForKeyboard (notification: Notification){

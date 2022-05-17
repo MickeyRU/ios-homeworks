@@ -11,7 +11,7 @@ class ProfileViewController: UIViewController {
     
     private let postModel: [PostModel] = PostModel.makePostModel()
     private let imageModel: [ImageModel] = ImageModel.makeImageModel()
-    
+ 
     private lazy var tableView : UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -49,7 +49,7 @@ class ProfileViewController: UIViewController {
 
 // MARK: UITableViewDataSource
 extension ProfileViewController: UITableViewDataSource {
-        
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return postModel.count + 1
     }
@@ -59,7 +59,7 @@ extension ProfileViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
             cell.setupCell(postModel[indexPath.row - 1])
             return cell
-
+            
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifier, for: indexPath) as! PhotosTableViewCell
             cell.setupLabel("")

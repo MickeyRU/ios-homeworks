@@ -164,8 +164,14 @@ class ProfileHeaderView: UIView, UITextFieldDelegate  {
     }
     
     @objc func pushButton(sender: UIButton) {
-        print("Status is: \(String(describing: statusLabel.text))")
+        
+        // Проверка на заполнениею поле статуса
+        guard let textInField = statusTextField.text else { return }
+        if textInField.isEmpty {
+            statusTextField.shakeField()
+        } else {
         statusLabel.text = statusText
+        }
     }
     
     @objc private func tapAvatar() {
