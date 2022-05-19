@@ -9,9 +9,13 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
+    //  MARK: - Создание две заполненные модели
+    
     private let postModel: [PostModel] = PostModel.makePostModel()
     private let imageModel: [ImageModel] = ImageModel.makeImageModel()
- 
+    
+    //  MARK: - Создание таблицы
+    
     private lazy var tableView : UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,7 +26,7 @@ class ProfileViewController: UIViewController {
         return tableView
     }()
     
-    
+    //  MARK: - переопределение жизненных циклов ProfileViewController-a
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +38,8 @@ class ProfileViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
+    //  MARK: - Размещение таблицы
+    
     private func layout() {
         view.addSubview(tableView)
         
@@ -44,20 +50,27 @@ class ProfileViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
-    
 }
 
-// MARK: UITableViewDataSource
+//  MARK: - Расширение UITableViewDataSource
+
 extension ProfileViewController: UITableViewDataSource {
+    
+    //  Возвращает количество ячеек равное колличеству элементов в массиве postModel + 1
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return postModel.count + 1
     }
     
+    //  В зависимости от секции возвращает необходимый тип ячейки
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.item != 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
             cell.setupCell(postModel[indexPath.row - 1])
+            
+            //  Указываем делегата для изменения количества лайков при клике
+            cell.reciverOfDataFromeCell = self
             return cell
             
         } else {
@@ -70,12 +83,17 @@ extension ProfileViewController: UITableViewDataSource {
     }
 }
 
-// MARK: UITableViewDelegate
+//  MARK: - Расширение UITableViewDelegate
+
 extension ProfileViewController: UITableViewDelegate {
+    
+    //  Возвращает динамическую высоту ячейки
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+    //   В зависимости от секции возвращает необходимый хедер
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = ProfileHeaderView()
@@ -83,12 +101,73 @@ extension ProfileViewController: UITableViewDelegate {
         return section == 0 ? header : nil
     }
     
+    //  В зависимости от секции возвращает необходимую высоту хедера
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return section == 0 ? 220:0
     }
 }
 
-// MARK: PhotosTableViewCellDelegate
+//  MARK: - Расширение для делегата
+
+protocol DelegateOfReciverOfDataFromeCell {
+    func addLikes(likesInLabel: String) -> String
+    func showPhoto(viewsInLabel: String) -> String
+    
+}
+
+extension ProfileViewController: DelegateOfReciverOfDataFromeCell {
+    
+    //  Функция показа описания при тапе на Фото
+    
+    func showPhoto(viewsInLabel: String) -> String {
+        
+        let viewForDataFromeCell: UIView = {
+            let view = UIView()
+            view.backgroundColor = .white
+            view.translatesAutoresizingMaskIntoConstraints = false
+            return view
+        }()
+        
+        view.addSubview(viewForDataFromeCell)
+        
+        NSLayoutConstraint.activate([
+            
+            viewForDataFromeCell.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            viewForDataFromeCell.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            viewForDataFromeCell.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            viewForDataFromeCell.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+        ])
+        
+        lazy var tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        viewForDataFromeCell.addGestureRecognizer(tap)
+        
+        // Функция накрутки просмотров
+        
+        func addViews(viewsInLabel: String) -> String {
+            let views = (Int(viewsInLabel) ?? 0) + 1
+            let viewsInLabel: String
+            viewsInLabel = "\(views)"
+            return viewsInLabel
+        }
+        return addViews(viewsInLabel: viewsInLabel)
+    }
+    
+    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
+        sender.view?.removeFromSuperview()
+    }
+    
+    //  Функция для лайков
+    func addLikes(likesInLabel: String) -> String {
+        let likes = (Int(likesInLabel) ?? 0) + 1
+        let likesInLabel: String
+        likesInLabel = "\(likes)"
+        return likesInLabel
+    }
+}
+
+
 extension ProfileViewController: PhotosTableViewCellDelegate {
     func buttonPushed() {
         let photosViewController = PhotosViewController()

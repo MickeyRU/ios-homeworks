@@ -9,7 +9,7 @@ import UIKit
 
 struct LoginBase {
     
-    let basicUserName = "MargoDog"
-    let basicUserPassword = "1234Margo"
+    let basicUserName = "1"
+    let basicUserPassword = "123456"
     
 }
