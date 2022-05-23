@@ -114,14 +114,14 @@ class PostTableViewCell: UITableViewCell {
     lazy var tapOnImage = UITapGestureRecognizer(target: self, action: #selector(tapImage))
     
     @objc func tapImage() {
-        numberOfViews.text = reciverOfDataFromeCell?.showPhoto(viewsInLabel: numberOfViews.text ?? "0")
+        numberOfViews.text = reciverOfDataFromeCell?.showPhoto(viewsInLabel: numberOfViews.text ?? "0", postPhoto: postImageView.image!)
        
     }
     
     //  MARK: - Заполнение ячеек данными
     
     // Метод будет вызываться в другом классе
-    func setupCell(_ model: PostModel) {
+    func setupCell(model: PostModel) {
         postNameLabel.text = model.author
         postImageView.image = model.image
         descriptionLabel.text = model.description

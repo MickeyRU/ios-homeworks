@@ -9,11 +9,6 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    //  MARK: - Создание две заполненные модели
-    
-    private let postModel: [PostModel] = PostModel.makePostModel()
-    private let imageModel: [ImageModel] = ImageModel.makeImageModel()
-    
     //  MARK: - Создание таблицы
     
     private lazy var tableView : UITableView = {
@@ -59,7 +54,7 @@ extension ProfileViewController: UITableViewDataSource {
     //  Возвращает количество ячеек равное колличеству элементов в массиве postModel + 1
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return postModel.count + 1
+        return postsModel.count + 1
     }
     
     //  В зависимости от секции возвращает необходимый тип ячейки
@@ -67,7 +62,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.item != 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as! PostTableViewCell
-            cell.setupCell(postModel[indexPath.row - 1])
+            cell.setupCell(model: postsModel[indexPath.row - 1])
             
             //  Указываем делегата для изменения количества лайков при клике
             cell.reciverOfDataFromeCell = self
@@ -112,7 +107,7 @@ extension ProfileViewController: UITableViewDelegate {
 
 protocol DelegateOfReciverOfDataFromeCell {
     func addLikes(likesInLabel: String) -> String
-    func showPhoto(viewsInLabel: String) -> String
+    func showPhoto(viewsInLabel: String, postPhoto: UIImage) -> String
     
 }
 
@@ -120,26 +115,40 @@ extension ProfileViewController: DelegateOfReciverOfDataFromeCell {
     
     //  Функция показа описания при тапе на Фото
     
-    func showPhoto(viewsInLabel: String) -> String {
+    func showPhoto(viewsInLabel: String, postPhoto: UIImage) -> String {
         
         let viewForDataFromeCell: UIView = {
             let view = UIView()
-            view.backgroundColor = .white
+            view.backgroundColor = .black
+            view.alpha = 1
             view.translatesAutoresizingMaskIntoConstraints = false
             return view
         }()
-        
+
+        let zoomImageView: UIImageView = {
+            let view = UIImageView()
+            view.image = postPhoto
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.contentMode = .scaleAspectFit
+            return view
+        }()
+
         view.addSubview(viewForDataFromeCell)
-        
+        viewForDataFromeCell.addSubview(zoomImageView)
+
         NSLayoutConstraint.activate([
-            
+
             viewForDataFromeCell.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             viewForDataFromeCell.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             viewForDataFromeCell.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             viewForDataFromeCell.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            
+
+            zoomImageView.topAnchor.constraint(equalTo: viewForDataFromeCell.topAnchor),
+            zoomImageView.leadingAnchor.constraint(equalTo: viewForDataFromeCell.leadingAnchor),
+            zoomImageView.bottomAnchor.constraint(equalTo: viewForDataFromeCell.bottomAnchor),
+            zoomImageView.trailingAnchor.constraint(equalTo: viewForDataFromeCell.trailingAnchor)
         ])
-        
+
         lazy var tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
         viewForDataFromeCell.addGestureRecognizer(tap)
         

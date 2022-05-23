@@ -13,9 +13,9 @@ class CellPhotoCollectionViewCell: UICollectionViewCell {
     
     private let photoImages: UIImageView = {
         let photoImages = UIImageView()
-        photoImages .translatesAutoresizingMaskIntoConstraints = false
-        photoImages .contentMode = .scaleAspectFill
-        photoImages .clipsToBounds = true
+        photoImages.translatesAutoresizingMaskIntoConstraints = false
+        photoImages.contentMode = .scaleAspectFill
+        photoImages.clipsToBounds = true
         photoImages.layer.cornerRadius = 6
         return photoImages
     }()
@@ -30,8 +30,8 @@ class CellPhotoCollectionViewCell: UICollectionViewCell {
     }
     
     // Метод показа фото
-    func setupImageModel(_ image: ImageModel) {
-        photoImages.image = UIImage(named: image.image)
+    func setupImageModel(image: UIImage) {
+        photoImages.image = image
     }
     
     private func imageLayout() {
