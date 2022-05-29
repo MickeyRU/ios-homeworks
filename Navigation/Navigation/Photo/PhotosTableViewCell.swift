@@ -14,8 +14,6 @@ protocol PhotosTableViewCellDelegate: AnyObject {
 class PhotosTableViewCell: UITableViewCell {
     
     weak var delegate: PhotosTableViewCellDelegate?
-
-    private let imageModel: [ImageModel] = ImageModel.makeImageModel()
     
     // TableCollection для фото на странице профиля, после окна авторизитации ("лента" профиля)
     private lazy var collectionView: UICollectionView = {
@@ -99,13 +97,13 @@ class PhotosTableViewCell: UITableViewCell {
 extension PhotosTableViewCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageModel.count
+        return photoGalery.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellPhotoCollectionViewCell.identifier, for: indexPath) as!
         CellPhotoCollectionViewCell
-        cell.setupImageModel(imageModel[indexPath.item])
+        cell.setupImageModel(image: photoGalery[indexPath.item])
         return cell
     }
 }

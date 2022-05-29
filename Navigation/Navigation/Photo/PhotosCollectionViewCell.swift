@@ -13,6 +13,7 @@ class PhotosCollectionViewCell: UICollectionViewCell {
         galleryImage.translatesAutoresizingMaskIntoConstraints = false
         galleryImage.contentMode = .scaleAspectFill
         galleryImage.clipsToBounds = true
+        galleryImage.layer.cornerRadius = 6
         return galleryImage
     }()
     
@@ -26,8 +27,8 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     }
     
     //Метод показа фото
-    func setupImageModel(_ image: ImageModel) {
-        galleryImages.image = UIImage(named: image.image)
+    func setupImageModel(image: UIImage) {
+        galleryImages.image = image
     }
     
     private func imageLayout() {
