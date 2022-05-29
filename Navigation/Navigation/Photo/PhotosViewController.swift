@@ -119,9 +119,12 @@ extension PhotosViewController {
         lazy var tapToImage = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
         photoImageView.addGestureRecognizer(tapToImage)
         
+        navigationController?.navigationBar.isHidden = true
+        
     }
     
     @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer) {
         sender.view?.removeFromSuperview()
+        navigationController?.navigationBar.isHidden = false
     }
 }
