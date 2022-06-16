@@ -8,4 +8,4 @@
 6. [UITableView, UIScrollView, datasource и delegate" часть 2](https://github.com/MickeyRU/ios-homeworks/pull/9) - [Текст задания](https://github.com/netology-code/iosui-homeworks/blob/master/2.3/2.3.part_2.md)
 7. [CollectionView](https://github.com/MickeyRU/ios-homeworks/pull/11) - [Текст задания](https://github.com/netology-code/iosui-homeworks/tree/master/2.5)
 8. [Жесты и анимация](https://github.com/MickeyRU/ios-homeworks/pull/12) - [Текст задания](https://github.com/netology-code/iosui-homeworks/tree/master/2.6)
-9.[Дипломный блок профессии "iOS-разработчик"](https://github.com/MickeyRU/ios-homeworks/pull/13) -
+9. [Дипломный блок профессии "iOS-разработчик"](https://github.com/MickeyRU/ios-homeworks/pull/13)
